@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+
+  <title>Infinity Insurance Brokers</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    .comparison-container {
+      max-width: 800px;
+      margin: 100 auto;
+      
+      padding: 20px;
+      border-radius: 8px;
+      
+      text-align: center; /* Center the table */
+    }
+    
+.comparison-container h2 {
+  text-align: center; /* Center the title */
+  color: blue; /* Set title color to blue */
+}
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Infinity Insurance Brokers</h1>
+  <div class="form-container">
+    <h2>Insurance Policy Information</h2>
+    <!-- Insurance Policy Form -->
+    <form id="insurancePolicyForm">
+      <!-- Form Fields -->
+      <div>
+        <label for="serviceCode">Service Code:</label>
+        <input type="text" id="serviceCode" name="serviceCode" required>
+      </div>
+      <div>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+      <div>
+        <label for="vehicleNo">Vehicle No:</label>
+        <input type="text" id="vehicleNo" name="vehicleNo" required>
+      </div>
+      <div>
+        <label for="sumInsured">Sum Insured:</label>
+        <input type="number" id="sumInsured" name="sumInsured" required>
+      </div>
+      <div>
+        <label for="makeModel">Make/Model:</label>
+        <input type="text" id="makeModel" name="makeModel" required>
+      </div>
+     <div>
+        <label for="yom">Year of Manufacture (YOM):</label>
+        <select id="yom" name="yom" required>
+          <!-- JavaScript code to generate options dynamically -->
+        </select>
+      </div>
+      
+      <div>
+        <label for="insuredName">Name of Insured:</label>
+        <input type="text" id="insuredName" name="insuredName" required>
+      </div>
+    </form>
+  </div>
+
+  <div class="form-container">
+    <h2>Insurance Comparison Information</h2>
+    <!-- Insurance Comparison Form -->
+    <form id="insuranceComparisonForm">
+      <!-- Form Fields -->
+      <div>
+        <label for="insuranceProvider">Insurance Provider:</label>
+        <select id="insuranceProvider" name="insuranceProvider" required>
+          <option value="">Select Insurance Provider</option>
+          <option value="Orient">Orient</option>
+          <option value="Fairfirst">Fairfirst</option>
+          <option value="LOLC">LOLC</option>
+          <option value="MBSL">MBSL</option>
+          <option value="HNB">HNB</option>
+          <option value="CEYLINCO">CEYLINCO</option>
+          <option value="COOP">COOP</option>
+          <option value="SANASA">SANASA</option>
+          <option value="SLIC">SLIC</option>
+        </select>
+      </div>
+      <div>
+        <label for="totalPremium">Total Premium with Tax:</label>
+        <input type="number" id="totalPremium" name="totalPremium" required>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="fireTheftDamage" name="fireTheftDamage">
+        <label for="fireTheftDamage">Fire/Theft/Accidental Damage</label>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="maliciousAct" name="maliciousAct">
+        <label for="maliciousAct">Malicious Act</label>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="naturalPerils" name="naturalPerils">
+        <label for="naturalPerils">Natural Perils</label>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="airBagCover" name="airBagCover">
+        <label for="airBagCover">Air Bag Cover</label>
+        
+        <select id="airBagCoverOption" name="airBagCoverOption">
+          <option value="100%">100%</option>
+          <option value="✕">✕</option>
+        </select>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="thirdPartyBodilyInjury" name="thirdPartyBodilyInjury">
+        <label for="thirdPartyBodilyInjury">Third Party Bodily Injury</label>
+        <select id="thirdPartyBodilyInjuryOption" name="thirdPartyBodilyInjuryOption">
+          <option value="Unlimited">Unlimited</option>
+          <option value="✕">✕</option>
+        </select>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="thirdPartyPropertyDamage" name="thirdPartyPropertyDamage">
+        <label for="thirdPartyPropertyDamage">Third Party Property Damage LKR</label>
+        <input type="text" id="thirdPartyPropertyDamageValue" name="thirdPartyPropertyDamageValue" placeholder="text">
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="strikeRiotCommotion" name="strikeRiotCommotion">
+        <label for="strikeRiotCommotion">Strike Riot & Civil Commotion</label>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="terrorism" name="terrorism">
+        <label for="terrorism">Terrorism</label>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="towingCharges" name="towingCharges">
+        <label for="towingCharges">Towing Charges LKR</label>
+        <input type="text" id="towingChargesValue" name="towingChargesValue" placeholder="text">
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="personalAccidentBenefit" name="personalAccidentBenefit">
+        <label for="personalAccidentBenefit">Personal Accident Benefit for Passengers</label>
+        <input type="text" id="personalAccidentBenefitValue" name="personalAccidentBenefitValue" placeholder="text">
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="specialWindscreenCover" name="specialWindscreenCover">
+        <label for="specialWindscreenCover">Special Windscreen cover</label>
+        <input type="text" id="specialWindscreenCoverValue" name="specialWindscreenCoverValue" placeholder="text">
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="freeTaxiAllowance" name="freeTaxiAllowance">
+        <label for="freeTaxiAllowance">Free Taxi Allowance</label>
+        <input type="text" id="freeTaxiAllowanceValue" name="freeTaxiAllowanceValue" placeholder="text">
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="callGoCover" name="callGoCover">
+        <label for="callGoCover">Call & Go Cover</label>
+        <input type="text" id="callGoCoverValue" name="callGoCoverValue" placeholder="text">
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="policyExcesses" name="policyExcesses">
+        <label for="policyExcesses">Policy Excesses</label>
+        <input type="text" id="policyExcessesValue" name="policyExcessesValue" placeholder="text">
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="conditions" name="conditions">
+        <label for="conditions">CONDITIONS</label>
+        <input type="text" id="conditionsValue" name="conditionsValue" placeholder="text">
+      </div>
+
+      <button type="button" onclick="addRow()">Add Insurance Comparison</button>
+    </form>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="comparison-container">
+    <h2>Insurance Comparison Table</h2>
+    <table id="comparisonTable">
+      <thead>
+        <tr>
+          <th>Insurance Provider</th>
+          <th>Total Premium with Tax</th>
+          <th>Fire/Theft/Accidental Damage</th>
+          <th>Malicious Act</th>
+          <th>Natural Perils</th>
+          <th>Air Bag Cover</th>
+          <th>Third Party Bodily Injury</th>
+          <th>Third Party Property Damage LKR</th>
+          <th>Strike Riot & Civil Commotion</th>
+          <th>Terrorism</th>
+          <th>Towing Charges LKR</th>
+          <th>Personal Accident Benefit for Passengers</th>
+          <th>Special Windscreen cover</th>
+          <th>Free Taxi Allowance</th>
+          <th>Call & Go Cover</th>
+          <th>Policy Exceses</th>
+          <th>CONDITIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be added dynamically -->
+      </tbody>
+    </table>
+  </div>
+  
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+
+  <button onclick="generatePDF()" style="background-color: red; display: block; margin: 0 auto;">Generate PDF</button>
+
+
+
+
+  <script>
+    
+   // Dynamically generate options for the YOM select element
+    var selectYOM = document.getElementById("yom");
+    var currentYear = new Date().getFullYear();
+    var startYear = 1980;
+
+    for (var year = currentYear; year >= startYear; year--) {
+      var option = document.createElement("option");
+      option.text = year;
+      option.value = year;
+      selectYOM.appendChild(option);
+    }
+
+    
+    function addRow() {
+      var form = document.getElementById("insuranceComparisonForm");
+      var provider = form.elements["insuranceProvider"].value;
+      var premium = form.elements["totalPremium"].value;
+
+      if (provider && premium) {
+        var table = document.getElementById("comparisonTable").getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow();
+        var cells = Array.from({ length: 17 }, () => newRow.insertCell());
+        
+        cells[0].textContent = provider;
+        cells[1].textContent = premium;
+        cells[2].textContent = form.elements["fireTheftDamage"].checked ? "✓" : "✕";
+cells[3].textContent = form.elements["maliciousAct"].checked ? "✓" : "✕";
+cells[4].textContent = form.elements["naturalPerils"].checked ? "✓" : "✕";
+cells[5].textContent = form.elements["airBagCover"].checked ? form.elements["airBagCoverOption"].value : "✕";
+cells[6].textContent = form.elements["thirdPartyBodilyInjury"].checked ? form.elements["thirdPartyBodilyInjuryOption"].value : "Unlimited";
+cells[7].textContent = form.elements["thirdPartyPropertyDamage"].checked ? form.elements["thirdPartyPropertyDamageValue"].value : "✕";
+cells[8].textContent = form.elements["strikeRiotCommotion"].checked ? "✓" : "✕";
+cells[9].textContent = form.elements["terrorism"].checked ? "✓" : "✕";
+cells[10].textContent = form.elements["towingCharges"].checked ? form.elements["towingChargesValue"].value : "✕";
+cells[11].textContent = form.elements["personalAccidentBenefit"].checked ? form.elements["personalAccidentBenefitValue"].value : "✕";
+cells[12].textContent = form.elements["specialWindscreenCover"].checked ? form.elements["specialWindscreenCoverValue"].value : "✕";
+cells[13].textContent = form.elements["freeTaxiAllowance"].checked ? form.elements["freeTaxiAllowanceValue"].value : "✕";
+cells[14].textContent = form.elements["callGoCover"].checked ? form.elements["callGoCoverValue"].value : "✕";
+cells[15].textContent = form.elements["policyExcesses"].checked ? form.elements["policyExcessesValue"].value : "✕";
+cells[16].textContent = form.elements["conditions"].checked ? form.elements["conditionsValue"].value : "✕";
+
+
+
+      } else {
+        alert("Please fill in all fields before adding to comparison.");
+      }
+    }
+    
+    function generatePDF() {
+  var doc = new jsPDF();
+
+  // Add Insurance Policy Information
+  doc.setFontSize(18);
+  doc.text(20, 20, 'Insurance Policy Information');
+
+  var insurancePolicyFields = document.getElementById("insurancePolicyForm").elements;
+  var yPosition = 30;
+  for (var i = 0; i < insurancePolicyFields.length; i++) {
+    var field = insurancePolicyFields[i];
+    if (field.tagName.toLowerCase() !== "button") {
+      doc.setFontSize(12);
+      doc.text(20, yPosition, field.name.replace(/([A-Z])/g, ' $1').toUpperCase() + ': ' + field.value);
+      yPosition += 10;
+    }
+  }
+
+  // Add Insurance Comparison Table
+  doc.addPage();
+  doc.setFontSize(18);
+  doc.text(20, 20, 'Insurance Comparison Table');
+
+  var table = document.getElementById("comparisonTable");
+  var rows = table.getElementsByTagName("tr");
+  var colPositions = [20, 70, 170, 250, 350, 450, 550, 650, 750, 850, 950, 1050, 1150, 1250, 1350, 1450, 1550];
+
+  for (var i = 0; i < rows.length; i++) {
+    var cells = rows[i].getElementsByTagName("td");
+    yPosition = 30 + i * 10;
+    for (var j = 0; j < cells.length; j++) {
+      doc.setFontSize(12);
+      doc.text(colPositions[j], yPosition, cells[j].innerText);
+    }
+  }
+
+  doc.save('insurance_information.pdf');
+}
+
+    
+  </script>
+</body>
+</html>
