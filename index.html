@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-
   <title>Infinity Insurance Brokers</title>
-  
+  <script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -91,6 +91,13 @@
       background-color: #f2f2f2;
     }
   </style>
+  
+  
+  
+</head>
+<body>
+  
+  
 </head>
 <body>
   <h1>Infinity Insurance Brokers</h1>
@@ -271,103 +278,131 @@
   </div>
   
   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <button id="pdfButton" style="background-color: red; display: block; margin: 0 auto;" onclick="generatePDF()">Generate PDF</button>
 
-
-  <button onclick="generatePDF()" style="background-color: red; display: block; margin: 0 auto;">Generate PDF</button>
 
 
 
 
   <script>
     
-   // Dynamically generate options for the YOM select element
-    var selectYOM = document.getElementById("yom");
-    var currentYear = new Date().getFullYear();
-    var startYear = 1980;
+    // Dynamically generate options for the YOM select element
+  var selectYOM = document.getElementById("yom");
+  var currentYear = new Date().getFullYear();
+  var startYear = 1980;
 
-    for (var year = currentYear; year >= startYear; year--) {
-      var option = document.createElement("option");
-      option.text = year;
-      option.value = year;
-      selectYOM.appendChild(option);
-    }
-
-    
-    function addRow() {
-      var form = document.getElementById("insuranceComparisonForm");
-      var provider = form.elements["insuranceProvider"].value;
-      var premium = form.elements["totalPremium"].value;
-
-      if (provider && premium) {
-        var table = document.getElementById("comparisonTable").getElementsByTagName('tbody')[0];
-        var newRow = table.insertRow();
-        var cells = Array.from({ length: 17 }, () => newRow.insertCell());
-        
-        cells[0].textContent = provider;
-        cells[1].textContent = premium;
-        cells[2].textContent = form.elements["fireTheftDamage"].checked ? "✓" : "✕";
-cells[3].textContent = form.elements["maliciousAct"].checked ? "✓" : "✕";
-cells[4].textContent = form.elements["naturalPerils"].checked ? "✓" : "✕";
-cells[5].textContent = form.elements["airBagCover"].checked ? form.elements["airBagCoverOption"].value : "✕";
-cells[6].textContent = form.elements["thirdPartyBodilyInjury"].checked ? form.elements["thirdPartyBodilyInjuryOption"].value : "Unlimited";
-cells[7].textContent = form.elements["thirdPartyPropertyDamage"].checked ? form.elements["thirdPartyPropertyDamageValue"].value : "✕";
-cells[8].textContent = form.elements["strikeRiotCommotion"].checked ? "✓" : "✕";
-cells[9].textContent = form.elements["terrorism"].checked ? "✓" : "✕";
-cells[10].textContent = form.elements["towingCharges"].checked ? form.elements["towingChargesValue"].value : "✕";
-cells[11].textContent = form.elements["personalAccidentBenefit"].checked ? form.elements["personalAccidentBenefitValue"].value : "✕";
-cells[12].textContent = form.elements["specialWindscreenCover"].checked ? form.elements["specialWindscreenCoverValue"].value : "✕";
-cells[13].textContent = form.elements["freeTaxiAllowance"].checked ? form.elements["freeTaxiAllowanceValue"].value : "✕";
-cells[14].textContent = form.elements["callGoCover"].checked ? form.elements["callGoCoverValue"].value : "✕";
-cells[15].textContent = form.elements["policyExcesses"].checked ? form.elements["policyExcessesValue"].value : "✕";
-cells[16].textContent = form.elements["conditions"].checked ? form.elements["conditionsValue"].value : "✕";
-
-
-
-      } else {
-        alert("Please fill in all fields before adding to comparison.");
-      }
-    }
-    
-    function generatePDF() {
-  var doc = new jsPDF();
-
-  // Add Insurance Policy Information
-  doc.setFontSize(18);
-  doc.text(20, 20, 'Insurance Policy Information');
-
-  var insurancePolicyFields = document.getElementById("insurancePolicyForm").elements;
-  var yPosition = 30;
-  for (var i = 0; i < insurancePolicyFields.length; i++) {
-    var field = insurancePolicyFields[i];
-    if (field.tagName.toLowerCase() !== "button") {
-      doc.setFontSize(12);
-      doc.text(20, yPosition, field.name.replace(/([A-Z])/g, ' $1').toUpperCase() + ': ' + field.value);
-      yPosition += 10;
-    }
+  for (var year = currentYear; year >= startYear; year--) {
+    var option = document.createElement("option");
+    option.text = year;
+    option.value = year;
+    selectYOM.appendChild(option);
   }
 
-  // Add Insurance Comparison Table
-  doc.addPage();
-  doc.setFontSize(18);
-  doc.text(20, 20, 'Insurance Comparison Table');
 
-  var table = document.getElementById("comparisonTable");
-  var rows = table.getElementsByTagName("tr");
-  var colPositions = [20, 70, 170, 250, 350, 450, 550, 650, 750, 850, 950, 1050, 1150, 1250, 1350, 1450, 1550];
+  function addRow() {
+    var form = document.getElementById("insuranceComparisonForm");
+    var provider = form.elements["insuranceProvider"].value;
+    var premium = form.elements["totalPremium"].value;
 
-  for (var i = 0; i < rows.length; i++) {
-    var cells = rows[i].getElementsByTagName("td");
-    yPosition = 30 + i * 10;
-    for (var j = 0; j < cells.length; j++) {
-      doc.setFontSize(12);
-      doc.text(colPositions[j], yPosition, cells[j].innerText);
+    if (provider && premium) {
+      var table = document.getElementById("comparisonTable").getElementsByTagName('tbody')[0];
+      var newRow = table.insertRow();
+      var cells = Array.from({ length: 17 }, () => newRow.insertCell());
+
+      cells[0].textContent = provider;
+      cells[1].textContent = premium;
+      cells[2].textContent = form.elements["fireTheftDamage"].checked ? "✓" : "✕";
+      cells[3].textContent = form.elements["maliciousAct"].checked ? "✓" : "✕";
+      cells[4].textContent = form.elements["naturalPerils"].checked ? "✓" : "✕";
+      cells[5].textContent = form.elements["airBagCover"].checked ? form.elements["airBagCoverOption"].value : "✕";
+      cells[6].textContent = form.elements["thirdPartyBodilyInjury"].checked ? form.elements["thirdPartyBodilyInjuryOption"].value : "Unlimited";
+      cells[7].textContent = form.elements["thirdPartyPropertyDamage"].checked ? form.elements["thirdPartyPropertyDamageValue"].value : "✕";
+      cells[8].textContent = form.elements["strikeRiotCommotion"].checked ? "✓" : "✕";
+      cells[9].textContent = form.elements["terrorism"].checked ? "✓" : "✕";
+      cells[10].textContent = form.elements["towingCharges"].checked ? form.elements["towingChargesValue"].value : "✕";
+      cells[11].textContent = form.elements["personalAccidentBenefit"].checked ? form.elements["personalAccidentBenefitValue"].value : "✕";
+      cells[12].textContent = form.elements["specialWindscreenCover"].checked ? form.elements["specialWindscreenCoverValue"].value : "✕";
+      cells[13].textContent = form.elements["freeTaxiAllowance"].checked ? form.elements["freeTaxiAllowanceValue"].value : "✕";
+      cells[14].textContent = form.elements["callGoCover"].checked ? form.elements["callGoCoverValue"].value : "✕";
+      cells[15].textContent = form.elements["policyExcesses"].checked ? form.elements["policyExcessesValue"].value : "✕";
+      cells[16].textContent = form.elements["conditions"].checked ? form.elements["conditionsValue"].value : "✕";
+
+      // Add remove button
+      var removeButtonCell = newRow.insertCell();
+      var removeButton = document.createElement("button");
+      removeButton.textContent = "Remove";
+      removeButton.onclick = function() {
+        table.deleteRow(newRow.rowIndex);
+      };
+      removeButtonCell.appendChild(removeButton);
+    } else {
+      alert("Please fill in all fields before adding to comparison.");
     }
   }
+   
+   function generatePDF() {
+    // Initialize jsPDF
+    var doc = new jsPDF();
 
-  doc.save('insurance_information.pdf');
+    // Add title for Insurance Policy Information
+    doc.setFontSize(18);
+    doc.text("Insurance Policy Information", 14, 20);
+
+    // Get form data
+    var insurancePolicyForm = document.getElementById("insurancePolicyForm");
+    var formData = new FormData(insurancePolicyForm);
+
+    // Iterate over form fields and add to PDF
+    var posY = 30;
+    formData.forEach(function(value, key) {
+        doc.setFontSize(12);
+        doc.text(`${key}: ${value}`, 14, posY);
+        posY += 10;
+    });
+
+    // Add title for Insurance Comparison Table
+    doc.setFontSize(18);
+    posY += 10;
+    doc.text("Insurance Comparison Table", 14, posY);
+
+    // Get table data
+    var comparisonTable = document.getElementById("comparisonTable");
+    var tableRows = comparisonTable.getElementsByTagName("tr");
+
+    // Iterate over table rows and add to PDF
+    var colNames = [];
+    for (var i = 0; i < tableRows[0].cells.length - 1; i++) {
+        colNames.push(tableRows[0].cells[i].textContent);
+    }
+    posY += 10;
+    doc.autoTable({
+        startY: posY,
+        head: [colNames],
+        body: getTableData(comparisonTable),
+    });
+
+    // Save the PDF
+    doc.save("Insurance_Comparison.pdf");
 }
 
+function getTableData(table) {
+    var data = [];
+    // Iterate through table rows
+    for (var i = 1; i < table.rows.length; i++) {
+        var tableRow = table.rows[i];
+        var rowData = [];
+        // Iterate through table cells
+        for (var j = 0; j < tableRow.cells.length - 1; j++) {
+            rowData.push(tableRow.cells[j].textContent);
+        }
+        data.push(rowData);
+    }
+    return data;
+}
+
+
+ 
+    
     
   </script>
 </body>
